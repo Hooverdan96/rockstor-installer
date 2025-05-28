@@ -32,39 +32,17 @@ suseSetupProduct
 #--------------------------------------
 suseImportBuildKey
 
-#======================================
-# Import Rockstor GPG Key
-# https://raw.githubusercontent.com/rockstor/rockstor-core/master/conf/ROCKSTOR-GPG-KEY
-# N.B. Expires 2025-05-29
-#--------------------------------------
-t=$(mktemp)
-cat - <<EOF > $t
------BEGIN PGP PUBLIC KEY BLOCK-----
+#==========================================
+# Import Rockstor's rpm/repo GPG Public Key
+# https://rockstor.com/ROCKSTOR-GPG-KEY
+#------------------------------------------
 
-mQENBF7SoJkBCADTKeUnVek8p8bXlDF3vhABCCq9FFYf6NN5ZrtDoZUa2Zysazij
-lqusMdpdswuqxsre7fjsGtMS9sGf16Yp0PUpqCel/fH/vN/foV38ur939gXswa3E
-+ZbVtltSnzSJZxqVGpgK8Lih3jFoyC8abhEfnCLXKBTEdpZPOgyDtanM1h9EHsZG
-wjzw2vi/CgCiPJwdIeNrrBp3IO69t4PfgHWCAfeHAuVscOecfJ4u0PZWLchE8tsH
-UUj5ijXoA1yPMSR8v5lLJfB5ElIYHP+Uqs4RhX2cVFVJN2IlaR+O9b2EAWjylwk4
-b9SxJe3aTGkMESc3XVSrtyMAntNivIjqDt6nABEBAAG0QlRoZSBSb2Nrc3RvciBQ
-cm9qZWN0IChSb2Nrc3RvciBEZXZlbG9wbWVudCkgPHN1cHBvcnRAcm9ja3N0b3Iu
-Y29tPokBVAQTAQgAPhYhBBXrUqcB5WwRYHPuURxCYvJfBDGHBQJe0qCZAhsDBQkJ
-ZgGABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEBxCYvJfBDGH/OMH/2l5yd3W
-SONhuXVwFjpY70iE8IM+Y6PPGUz5pFTCKJ8EpSznnuqFzlCr7Pgi9OFLoWoX6CAt
-h6dH/E+22ktZ0Mgi7Z8zkyyc5265iyk2liW49GLpeC2PIjkEzKv/7oNOpLg6sXH8
-i9Z9q+3RXPGUOw8I5uR1kYDwDtMNBxnWaTsL5qHRSDxR0WgOFgilMQVeE1uoxd3m
-SeLW4cnzw/2MGYKsniHCePB70WSEYZaX8kLOXVsskBn0/LnVICB2cSo7cKz4YmUe
-MTqgCQwMURIn8eSz/8gxl4rONal4CGZTb899VLIqgqr5IEEqas3o8WJbRf/I6akJ
-I9yXyz+yWhBlTTU=
-=8Urm
------END PGP PUBLIC KEY BLOCK-----
-EOF
-rpm --import $t
-rm -f $t
+rpm --erase gpg-pubkey-5f043187 || true
+rpm --import https://rockstor.com/ROCKSTOR-GPG-KEY
 
-#======================================
-# Auto import all repo GPG keys
-#--------------------------------------
+#=========================================
+# Auto import all compatible repo GPG keys
+#-----------------------------------------
 zypper --non-interactive --gpg-auto-import-keys refresh
 
 #======================================
