@@ -258,6 +258,7 @@
     <!--        <source path="https://download.opensuse.org/repositories/filesystems/16.0/"/> -->
     <!--    </repository> -->
     <packages type="image">
+        <package name="acl"/>
         <package name="adaptec-firmware"/> <!-- Razor AIC94xx Series SAS -->
         <package name="bash-completion"/>
         <package name="bind-utils"/>
